@@ -730,13 +730,10 @@ void MainWindow::msgPoke(const MumbleProto::Poke &msg) {
 
 	const QString &plainName = pSrc ? pSrc->qsName : tr("Server", "message from");
 	const QString &name = pSrc ? Log::formatClientUser(pSrc, Log::Source) : tr("Server", "message from");
-	bool privateMessage = true;
 
 	target += tr("(Private) ");
 
-	g.l->log(privateMessage ? Log::Poke : Log::Poke,
-	         tr("%2%1: %3").arg(name).arg(target).arg(u8(msg.message())),
-	         tr("Message from %1").arg(plainName));
+	g.l->log(Log::Poke, tr("Message from %1").arg(plainName));
 }
 
 void MainWindow::msgACL(const MumbleProto::ACL &msg) {

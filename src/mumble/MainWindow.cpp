@@ -33,7 +33,6 @@
 #include "RichTextEditor.h"
 #include "ServerHandler.h"
 #include "TextMessage.h"
-#include "Poke.h"
 #include "Tokens.h"
 #include "User.h"
 #include "UserEdit.h"
