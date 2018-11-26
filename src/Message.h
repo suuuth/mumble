@@ -28,6 +28,7 @@
 	MUMBLE_MH_MSG(UserState) \
 	MUMBLE_MH_MSG(BanList) \
 	MUMBLE_MH_MSG(TextMessage) \
+	MUMBLE_MH_MSG(Poke) \
 	MUMBLE_MH_MSG(PermissionDenied) \
 	MUMBLE_MH_MSG(ACL) \
 	MUMBLE_MH_MSG(QueryUsers) \

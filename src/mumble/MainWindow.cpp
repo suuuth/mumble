@@ -33,6 +33,7 @@
 #include "RichTextEditor.h"
 #include "ServerHandler.h"
 #include "TextMessage.h"
+#include "Poke.h"
 #include "Tokens.h"
 #include "User.h"
 #include "UserEdit.h"
@@ -1486,6 +1487,7 @@ void MainWindow::qmUser_aboutToShow() {
 	}
 
 	qmUser->addAction(qaUserTextMessage);
+	qmUser->addAction(qaUserPoke);
 	if (g.sh && g.sh->uiVersion >= 0x010202)
 		qmUser->addAction(qaUserInformation);
 
@@ -1823,6 +1825,34 @@ void MainWindow::on_qaUserInformation_triggered() {
 		return;
 
 	g.sh->requestUserStats(p->uiSession, false);
+}
+
+void MainWindow::on_qaUserPoke_triggered() {
+	ClientUser *p = getContextMenuUser();
+
+	if (!p)
+		return;
+
+	openPokeDialog(p);
+}
+
+void MainWindow::openPokeDialog(ClientUser *p) {
+	unsigned int session = p->uiSession;
+
+	::TextMessage *texm = new ::TextMessage(this, tr("Poking %1").arg(p->qsName));
+	int res = texm->exec();
+
+	// Try to get find the user using the session id.
+	// This will return NULL if the user disconnected while typing the message.
+	p = ClientUser::get(session);
+
+	if (p && (res == QDialog::Accepted)) {
+		QString msg = texm->message();
+
+		g.sh->sendUserTextMessage(p->uiSession, msg);
+		g.l->log(Log::Poke, tr("To %1: %2").arg(Log::formatClientUser(p, Log::Target), texm->message()), tr("Poke to %1").arg(p->qsName), true);
+	}
+	delete texm;
 }
 
 void MainWindow::on_qaHide_triggered() {
@@ -2212,12 +2242,14 @@ void MainWindow::updateMenuPermissions() {
 		qaUserPrioritySpeaker->setEnabled(p & (ChanACL::Write | ChanACL::MuteDeafen));
 		qaUserTextMessage->setEnabled(p & (ChanACL::Write | ChanACL::TextMessage));
 		qaUserInformation->setEnabled((g.pPermissions & (ChanACL::Write | ChanACL::Register)) || (p & (ChanACL::Write | ChanACL::Enter)) || (cu == user));
+		qaUserPoke->setEnabled(p & (ChanACL::Write | ChanACL::TextMessage));
 	} else {
 		qaUserMute->setEnabled(false);
 		qaUserDeaf->setEnabled(false);
 		qaUserPrioritySpeaker->setEnabled(false);
 		qaUserTextMessage->setEnabled(false);
 		qaUserInformation->setEnabled(false);
+		qaUserPoke->setEnabled(false);
 	}
 
 	qaChannelJoin->setEnabled(p & (ChanACL::Write | ChanACL::Enter));

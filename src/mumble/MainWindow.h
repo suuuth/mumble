@@ -123,6 +123,7 @@ class MainWindow : public QMainWindow, public MessageHandler, public Ui::MainWin
 		
 		void updateChatBar();
 		void openTextMessageDialog(ClientUser *p);
+		void openPokeDialog(ClientUser *p);
 		void openUserLocalVolumeDialog(ClientUser *p);
 
 #ifdef Q_OS_WIN
@@ -206,6 +207,7 @@ class MainWindow : public QMainWindow, public MessageHandler, public Ui::MainWin
 		void on_qaUserLocalMute_triggered();
 		void on_qaUserLocalVolume_triggered();
 		void on_qaUserTextMessage_triggered();
+		void on_qaUserPoke_triggered();
 		void on_qaUserRegister_triggered();
 		void on_qaUserInformation_triggered();
 		void on_qaUserFriendAdd_triggered();

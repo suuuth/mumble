@@ -215,7 +215,7 @@ const Log::MsgType Log::msgOrder[] = {
 	ChannelJoin, ChannelLeave,
 	ChannelJoinConnect, ChannelLeaveDisconnect,
 	PermissionDenied,
-	TextMessage, PrivateTextMessage
+	TextMessage, Poke, PrivateTextMessage
 };
 
 const char *Log::msgNames[] = {
@@ -247,6 +247,7 @@ const char *Log::msgNames[] = {
 	QT_TRANSLATE_NOOP("Log", "You Joined Channel (moved)"),
 	QT_TRANSLATE_NOOP("Log", "User connected and entered channel"),
 	QT_TRANSLATE_NOOP("Log", "User left channel and disconnected"),
+	QT_TRANSLATE_NOOP("Log", "You were poked"),
 	QT_TRANSLATE_NOOP("Log", "Private text message")
 };
 

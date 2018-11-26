@@ -858,6 +858,14 @@ the channel's context menu.</string>
     <string>Query server for connection information for user</string>
    </property>
   </action>
+    <action name="qaUserPoke">
+   <property name="text">
+    <string>&amp;Poke...</string>
+   </property>
+   <property name="toolTip">
+    <string>Send poke to user</string>
+   </property>
+  </action>
   <action name="qaSelfComment">
    <property name="icon">
     <iconset>

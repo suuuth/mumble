@@ -16,5 +16,6 @@
         <file alias="UserLeftChannel.ogg">../../samples/UserLeftChannel.ogg</file>
         <file alias="UserMutedYouOrByYou.ogg">../../samples/UserMutedYouOrByYou.ogg</file>
         <file alias="RecordingStateChanged.ogg">../../samples/RecordingStateChanged.ogg</file>
+        <file alias="YouWerePoked.ogg">../../samples/YouWerePoked.ogg</file>
     </qresource>
 </RCC>
